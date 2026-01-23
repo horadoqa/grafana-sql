@@ -2,6 +2,8 @@
 
 Projeto com PostgreSQL + Grafana
 
+![Grafana](./images/image.png)
+
 ## 1️⃣ docker-compose.yml
 
 ```yaml

@@ -1,3 +1,5 @@
+# pip install faker psycopg2-binary
+
 from faker import Faker
 import psycopg2
 from psycopg2.extras import execute_values
@@ -43,7 +45,7 @@ def inserir_candidatos():
 
     sql = """
         INSERT INTO public.candidatos
-        (nome_completo, cpf, data_nascimento, estado_civil, email, telefone)
+        (nome_completo, cpf, data_nascimento, estado_civil, sexo, email, telefone)
         SELECT %s, %s, %s, %s, %s, %s
         WHERE NOT EXISTS (
             SELECT 1 FROM public.candidatos WHERE cpf = %s
