@@ -18,13 +18,19 @@
 
 Este projeto foi desenvolvido com docker-compose, e um Makefile foi criado para falicitar o processo de subida da infra.
 
-## 1️⃣ Execute o comando
+## 1️⃣ Pré-requisitos
+
+- Docker Desktop
+- DBeaver
+- Python
+
+## 2️⃣ Execute o comando
 
 ```bash
 $ make menu
 ```
 
-## 2️⃣Escolha a opão desejada
+## 3️⃣ Escolha a opão desejada
 
 ```bash
 ==============================
@@ -38,7 +44,7 @@ $ make menu
 Escolha uma opção: 
 ```
 
-## 3️⃣ Acessar o Grafana
+## 4️⃣ Acessar o Grafana
 
 * URL: **[http://localhost:3000](http://localhost:3000)**
 * Login padrão:
@@ -46,7 +52,7 @@ Escolha uma opção:
   * **Usuário:** `admin`
   * **Senha:** `admin` (vai pedir pra trocar)
 
-## 4️⃣ Popular o banco
+## 5️⃣ Popular o banco
 
 Na pasta SQL/CRUD tem um programa em python que cria 100 registros de candidatos.
 
@@ -55,7 +61,7 @@ Na pasta SQL/CRUD tem um programa em python que cria 100 registros de candidatos
 ✅ Inseridos 100 novos candidatos
 ```
 
-## 5️⃣ Contribuições
+## 6️⃣ Contribuições
 
 Contribuições são mais do que bem-vindas — são incentivadas 🚀
 Se você quer ajudar a melhorar este projeto, siga os passos abaixo:
@@ -98,7 +104,7 @@ Utilize a convenção de nomes (`feature/`, `fix/`, `docs/`).
 
 ### 🐛 Encontrou um problema?
 
-Fique à vontade para **abrir uma issue** descrevendo o bug, melhoria ou sugestão. Quanto mais detalhes, melhor!
+Fique à vontade para **abrir uma issue** descrevendo o bug, melhoria ou sugestão.
 
 ---
 
