@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS candidatos (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   nome_completo TEXT NOT NULL,
   cpf CHAR(11) NOT NULL UNIQUE,
-  sexo VARCHAR(10),
+  sexo VARCHAR(10) NOT NULL,
   data_nascimento DATE NOT NULL,
   estado_civil TEXT NOT NULL,
   email TEXT NOT NULL UNIQUE,
