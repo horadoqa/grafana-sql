@@ -1,5 +1,6 @@
-# sexo
+# Verifica a quantidade por sexo
 
+```sql
 SELECT
     sexo,
     COUNT(*) AS quantidade,
@@ -7,3 +8,4 @@ SELECT
 FROM public.candidatos
 GROUP BY sexo
 ORDER BY sexo;
+```
