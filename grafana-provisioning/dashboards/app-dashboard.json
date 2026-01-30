@@ -1,9 +1,38 @@
 {
   "uid": "dashboard-candidatos",
   "title": "Dashboard Candidatos",
-  "schemaVersion": 38,
+  "schemaVersion": 39,
   "version": 1,
-  "refresh": "10s",
+  "refresh": "5s",
+  "timezone": "",
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "liveNow": false,
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
   "panels": [
     {
       "id": 1,
@@ -13,33 +42,171 @@
         "type": "grafana-postgresql-datasource",
         "uid": "postgres-ds"
       },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 0
-      },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
       "targets": [
         {
+          "refId": "A",
+          "format": "table",
+          "rawSql": "SELECT COUNT(*) AS total FROM public.candidatos;",
           "datasource": {
             "type": "grafana-postgresql-datasource",
             "uid": "postgres-ds"
-          },
-          "format": "table",
-          "rawSql": "SELECT COUNT(*) AS total FROM public.candidatos;",
-          "refId": "A"
+          }
         }
       ],
       "options": {
+        "orientation": "auto",
         "reduceOptions": {
           "calcs": ["lastNotNull"],
           "values": false
         },
-        "orientation": "auto",
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
       "pluginVersion": "10.2.3"
+    },
+    {
+      "id": 3,
+      "type": "barchart",
+      "title": "Candidatos por Estado Civil",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "postgres-ds"
+      },
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 },
+      "targets": [
+        {
+          "refId": "A",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT estado_civil, COUNT(*) AS quantidade FROM public.candidatos GROUP BY estado_civil ORDER BY quantidade DESC;",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "postgres-ds"
+          }
+        }
+      ],
+      "options": {
+        "orientation": "auto",
+        "showValue": "never",
+        "stacking": "none",
+        "legend": {
+          "displayMode": "list",
+          "placement": "right",
+          "showLegend": true
+        }
+      },
+      "pluginVersion": "10.2.3"
+    },
+    {
+      "id": 2,
+      "type": "gauge",
+      "title": "Distribuição por Sexo (%)",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "postgres-ds"
+      },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 8 },
+      "targets": [
+        {
+          "refId": "A",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT sexo, COUNT(*) AS quantidade, ROUND((COUNT(*) * 100.0 / (SELECT COUNT(*) FROM public.candidatos)), 2) AS percentual FROM public.candidatos GROUP BY sexo ORDER BY sexo;",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "postgres-ds"
+          }
+        }
+      ],
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "values": true
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "10.2.3"
+    },
+    {
+      "id": 5,
+      "type": "barchart",
+      "title": "Faixa Etária dos Candidatos",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "postgres-ds"
+      },
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 8 },
+      "targets": [
+        {
+          "refId": "A",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT FLOOR(DATE_PART('year', AGE(data_nascimento)) / 10) AS faixa_inicial, CONCAT(FLOOR(DATE_PART('year', AGE(data_nascimento)) / 10) * 10, ' - ', FLOOR(DATE_PART('year', AGE(data_nascimento)) / 10) * 10 + 9) AS faixa_idade, COUNT(*) AS quantidade FROM public.candidatos GROUP BY faixa_inicial ORDER BY faixa_inicial;",
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "postgres-ds"
+          }
+        }
+      ],
+      "options": {
+        "orientation": "auto",
+        "showValue": "never",
+        "stacking": "normal",
+        "legend": {
+          "displayMode": "list",
+          "placement": "right",
+          "showLegend": true
+        }
+      },
+      "pluginVersion": "10.2.3"
+    },
+    {
+  "id": 6,
+  "type": "timeseries",
+  "title": "Candidatos cadastrados por dia",
+  "datasource": {
+    "type": "grafana-postgresql-datasource",
+    "uid": "postgres-ds"
+  },
+  "gridPos": {
+    "h": 8,
+    "w": 24,
+    "x": 0,
+    "y": 16
+  },
+  "targets": [
+    {
+      "refId": "A",
+      "format": "time_series",
+      "rawQuery": true,
+      "rawSql": "SELECT DATE(criado_em) AS time, COUNT(*) AS quantidade FROM public.candidatos GROUP BY time ORDER BY time;",
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "postgres-ds"
+      }
     }
+  ],
+  "fieldConfig": {
+    "defaults": {
+      "unit": "short",
+      "color": {
+        "mode": "palette-classic"
+      }
+    },
+    "overrides": []
+  },
+  "options": {
+    "legend": {
+      "displayMode": "list",
+      "placement": "bottom"
+    },
+    "tooltip": {
+      "mode": "single"
+    }
+  },
+  "pluginVersion": "10.2.3"
+}
   ]
 }
