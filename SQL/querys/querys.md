@@ -1,35 +1,5 @@
 # Querys Utilizadas
 
-Conta quantas tabelas existem no banco (todas as schemas)
-
-```sql
-SELECT COUNT(*) 
-FROM pg_catalog.pg_tables;
-```
-
--- Lista os nomes das schemas existentes no banco
-
-```sql
-SELECT schemaname 
-FROM pg_catalog.pg_tables;
-```
-
--- Lista todas as tabelas pertencentes à schema "public"
--- (OBS: em PostgreSQL, strings usam aspas simples, não duplas)
-
-```sql
-SELECT * 
-FROM pg_catalog.pg_tables 
-WHERE schemaname = 'public';
-```
-
--- Conta o total de registros da tabela candidatos
-
-```sql
-SELECT COUNT(*) 
-FROM candidatos;
-```
-
 -- Cria a extensão necessária para gerar UUID automaticamente
 
 ```sql
@@ -82,7 +52,7 @@ SELECT *
 FROM public.candidatos;
 ```
 
--- Conta novamente o total de candidatos
+-- Conta o total de registros da tabela candidatos
 
 ```sql
 SELECT COUNT(*) 
@@ -96,66 +66,51 @@ SELECT id, nome_completo, sexo
 FROM public.candidatos;
 ```
 
--- Remove a coluna sexo da tabela (operação destrutiva)
+-- Procurar pelo nome do candidato
+
+```sql
+SELECT *
+FROM public.candidatos
+WHERE nome_completo = 'Fulano de tal';
+```
+
+-- Busca parcial (contém o texto)
+-- Muito usada quando você não sabe o nome completo:
+
+```sql
+SELECT *
+FROM public.candidatos
+WHERE nome_completo LIKE '%Fulano%';
+```
+
+-- Alterar o email com base no IF
+
+```sql
+UPDATE public.candidatos
+SET email = 'novo-email@teste.com'
+WHERE id = 'b5ff10ae-8a15-4afb-ad89-e8ad7836d90c';
+```
+
+-- Alterar o email com base no CPF
+
+```sql
+UPDATE public.candidatos
+SET email = 'novo-email@teste.com'
+WHERE cpf = '1234567890 ';
+```
+
+-- Remove a uma coluna da tabela (operação destrutiva)
 
 ```sql
 ALTER TABLE public.candidatos
-DROP COLUMN sex;
+DROP COLUMN {nome da coluna};
 ```
 
--- Adiciona a coluna sexo caso não exista
+-- Adiciona uma coluna caso não exista
 
 ```sql
 ALTER TABLE public.candidatos
-ADD COLUMN IF NOT EXISTS sexo VARCHAR(10);
-```
-
--- Preenche a coluna sexo com base na última letra do nome
--- (heurística simples, não 100% confiável)
-
-```sql
-UPDATE public.candidatos
-SET sexo = CASE
-    WHEN nome_completo ILIKE '%a' THEN 'Feminino'
-    ELSE 'Masculino'
-END
-WHERE sexo IS NULL;
-```
-
--- Atualiza o sexo com base em nomes conhecidos
--- Se não corresponder, define como "Desconhecido"
-
-```sql
-UPDATE public.candidatos
-SET sexo = CASE
-    WHEN nome_completo ILIKE ANY (ARRAY['Alessandra%', 'Maria%', 'Ana%', 'Carla%']) THEN 'Feminino'
-    WHEN nome_completo ILIKE ANY (ARRAY['João%', 'Carlos%', 'Pedro%', 'José%']) THEN 'Masculino'
-    ELSE 'Desconhecido'
-END
-WHERE sexo IS NULL;
-```
-
--- Atualiza manualmente o sexo de um candidato específico pelo ID
-
-```sql
-UPDATE public.candidatos
-SET sexo = 'Masculino'
-WHERE id = 'fd3aa7a0-ca36-4fd8-b4b4-4027f3f9c530';
-```
-
--- Atualiza manualmente o sexo de outro candidato específico pelo ID
-
-```sql
-UPDATE public.candidatos
-SET sexo = 'Feminino'
-WHERE id = '4dbcaa33-0038-4a97-94b7-76e23636159c';
-```
-
--- Consulta ID, nome e sexo (sem ordenação)
-
-```sql
-SELECT id, nome_completo, sexo
-FROM public.candidatos;
+ADD COLUMN IF NOT EXISTS {nome da coluna} VARCHAR(10);
 ```
 
 -- Consulta ID, nome e sexo ordenados alfabeticamente
@@ -172,13 +127,6 @@ ORDER BY nome_completo ASC;
 UPDATE public.candidatos
 SET nome_completo = REPLACE(nome_completo, 'Srta. ', '')
 WHERE nome_completo LIKE 'Srta. %';
-```
-
--- Retorna todos os registros da tabela candidatos
-
-```sql
-SELECT * 
-FROM public.candidatos;
 ```
 
 -- Retorna apenas a estrutura da tabela (sem dados)

@@ -1,7 +1,6 @@
-# Estado Civil
+# Separando por Estado Civil
 
-Separando por Estado Civil
-
+```sql
 SELECT 
     estado_civil,
     COUNT(*) AS quantidade
@@ -11,3 +10,4 @@ GROUP BY
     estado_civil
 ORDER BY 
     quantidade DESC;
+```
