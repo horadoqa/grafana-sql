@@ -21,13 +21,13 @@ menu:
 
 up:
 	@echo "🚀 Subindo containers..."
-	docker-compose up -d
+	docker-compose -f db/docker-compose.yml up -d
 
 down:
 	@echo "🧹 Removendo containers e volumes..."
-	docker-compose down -v
+	docker-compose -f db/docker-compose.yml down -v
 
 restart:
 	@echo "🔄 Reiniciando containers..."
-	docker-compose down -v
-	docker-compose up -d
+	docker-compose -f db/docker-compose down -v
+	docker-compose -f db/docker-compose up -d
