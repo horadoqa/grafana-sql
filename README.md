@@ -152,7 +152,7 @@ Escolha uma opção:
 
 ### Dashboard
 
-* [http://localhost:3000/d/dashboard-candidatos/dashboard-candidatos](http://localhost:3000/d/dashboard-candidatos/dashboard-candidatos)
+* [Candidatos](http://localhost:3000/d/dashboard-candidatos/dashboard-candidatos)
 
 ---
 
@@ -160,17 +160,11 @@ Escolha uma opção:
 
 Para fins de teste e demonstração, existe um script de carga que insere **100 candidatos fictícios**.
 
-Localização:
-
-```text
-db/SQL/CRUD
-```
-
-Execução:
-
 ```bash
-python3 create.py
+python3 db/SQL/CRUD/create.py
 ```
+
+✅ Inseridos 100 novos candidatos
 
 ---
 
