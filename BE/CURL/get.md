@@ -3,7 +3,7 @@
 ## Todos os Candidatos
 
 ```bash
-curl http://localhost:8080/candidatos/
+curl http://localhost:8080/candidatos
 ```
 
 ## Busca por CPF
