@@ -2,7 +2,6 @@ package routes
 
 import (
 	"crud-go-gin/controllers"
-
 	"github.com/gin-gonic/gin"
 )
 
