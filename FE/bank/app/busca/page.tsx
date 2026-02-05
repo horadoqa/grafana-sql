@@ -1,9 +1,9 @@
-// app/busca/page.tsx
-export default function Busca() {
+import { BuscaForm } from "./BuscaForm"
+
+export default function BuscaPage() {
   return (
     <main>
-      <h1>Busca</h1>
-      <input type="text" placeholder="Buscar..." />
+      <BuscaForm />
     </main>
   )
 }

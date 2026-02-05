@@ -1,4 +1,4 @@
-import { CandidatoForm } from '@/components/CandidatoForm'
+import { CandidatoForm } from './CandidatoForm'
 
 export default function CadastroPage() {
   return (
