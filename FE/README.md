@@ -9,6 +9,13 @@
 ```bash
 nvm install 22 
 ```
+
+## Instalando dependências
+
+```bash
+npm install    
+```
+
 ## Instalando o React
 
 ```bash
@@ -18,7 +25,7 @@ npx create-next-app@latest bank
 `Success!` Created bank at /home/rfahham/projetos/bank/FE/bank
 
 
-Executando
+## Executando
 
 ```bash
 npm run dev
