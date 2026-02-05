@@ -1,16 +1,25 @@
 .container {
-  max-width: 800px;
-  margin: 3rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
   text-align: center;
 }
 
 .title {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  color: white;
+  font-size: 3rem;
+  margin-top: 1rem;
+  color: #fff;
 }
 
 .subtitle {
-  font-size: 1.2rem;
-  opacity: 0.9;
+  font-size: 1.25rem;
+  margin-top: 0.5rem;
+  color: #fff;
+}
+
+.icon {
+  width: 120px;
+  height: 120px;
 }

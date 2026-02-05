@@ -20,5 +20,4 @@ main {
 /* Garante que o html, body e main ocupem 100% da altura */
 html, body, main, #__next {
   height: 100%;
-  margin: 0;
 }

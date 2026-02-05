@@ -1,13 +1,15 @@
 .form {
-  max-width: 500px;
+  max-width: 800px;
+  /* aumenta a largura para caber os campos lado a lado */
   margin: 2rem auto;
   padding: 2rem;
   border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem;
+  margin-top: -50px;
 }
 
 .title {
@@ -18,18 +20,34 @@
   color: #333;
 }
 
-.label {
+/* container para os campos do formulário lado a lado */
+.formFields {
+  display: flex;
+  flex-wrap: wrap;
+  /* quebra linha em telas pequenas */
+  gap: 1rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 200px;
+    /* ocupa espaço proporcional, mínimo 200px */
+}
+
+.field label {
   font-weight: 600;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.25rem;
   color: #333;
 }
 
-.input {
-  padding: 0.6rem 0.8rem;
+.field input {
+  padding: 0.5rem 0.8rem;
   border-radius: 6px;
   border: 1px solid #ccc;
   font-size: 1rem;
   color: #333;
+  
 }
 
 .button {
@@ -46,4 +64,52 @@
 
 .button:hover {
   background-color: #2563eb;
+}
+
+.resultCard {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.resultTitle {
+  margin-bottom: 1rem;
+  font-weight: 700;
+  color: #14532d;
+}
+
+.resultFields {
+  display: flex;
+  flex-wrap: wrap;
+  /* permite quebrar linha em telas pequenas */
+  gap: 1rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 200px;
+  /* ocupa espaço proporcional, mínimo 200px */
+}
+
+.field label {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  border-color: #3b82f6;
+}
+
+.field input {
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #333;
+}
+
+.alertError {
+  color: #dc2626; /* vermelho vibrante */
+  font-weight: 600; /* opcional, deixa mais visível */
+  margin-top: 0.5rem; /* espaçamento em relação ao formulário */
 }

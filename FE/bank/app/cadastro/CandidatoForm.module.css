@@ -1,44 +1,59 @@
 .container {
-  max-width: 500px;
+  max-width: 800px; /* aumenta largura para acomodar campos lado a lado */
   margin: 2rem auto;
   padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.1);
   background-color: #ffffff;
   font-family: sans-serif;
+  margin-top: -50px;
 }
 
-.title{
+.title {
   text-align: center;
+  font-weight: 700;
+  font-size: 1.5rem;
   margin-bottom: 1.5rem;
-  font-weight: 800;
   color: #333;
 }
 
 .form {
   display: flex;
   flex-direction: column;
+  gap: 1.5rem;
 }
 
-.label {
-  margin-top: 1rem;
-  margin-bottom: 0.5rem;
+/* Container para os campos lado a lado */
+.formFields {
+  display: flex;
+  flex-wrap: wrap; /* permite quebrar linha em telas pequenas */
+  gap: 1rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 200px; /* ocupa espaço proporcional, mínimo 200px */
+}
+
+.field label {
   font-weight: 600;
+  margin-bottom: 0.25rem;
   color: #555;
 }
 
-.input,
-.select {
-  padding: 0.6rem 0.8rem;
+.field input,
+.field select {
+  padding: 0.5rem 0.8rem;
   border-radius: 6px;
   border: 1px solid #ccc;
   font-size: 1rem;
   transition: border-color 0.2s, box-shadow 0.2s;
-  color:#333
+  color: #333;
 }
 
-.input:focus,
-.select:focus {
+.field input:focus,
+.field select:focus {
   border-color: #3b82f6;
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
   outline: none;

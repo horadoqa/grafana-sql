@@ -67,15 +67,17 @@ export function BuscaForm() {
       }
 
       const res = await fetch(url)
-      if (!res.ok) {
-        const data = await res.json()
-        throw new Error(data.error || "Candidato não encontrado")
-      }
+      const data = await res.json()
 
-      const data: Candidato = await res.json()
-      setResultado(data)
+      if ("error" in data) {
+        setErro(data.error)
+        setResultado(null)
+      } else {
+        setResultado(data)
+        setErro(null)
+      }
     } catch (err: any) {
-      setErro(err.message)
+      setErro(err.message || "Ocorreu um erro ao buscar")
     } finally {
       setLoading(false)
     }
@@ -86,48 +88,54 @@ export function BuscaForm() {
       <form onSubmit={handleSubmit} className={styles.form}>
         <h2 className={styles.title}>Buscar Candidato</h2>
 
-        <label htmlFor="cpf" className={styles.label}>CPF</label>
-        <input
-          type="text"
-          id="cpf"
-          name="cpf"
-          value={form.cpf}
-          onChange={handleChange}
-          className={styles.input}
-          maxLength={14}
-          placeholder="123.456.789-01"
-        />
+        <div className={styles.formFields}>
+          <div className={styles.field}>
+            <label htmlFor="cpf">CPF</label>
+            <input
+              type="text"
+              id="cpf"
+              name="cpf"
+              value={form.cpf}
+              onChange={handleChange}
+              maxLength={14}
+              placeholder="123.456.789-01"
+            />
+          </div>
 
-        <label htmlFor="nome_completo" className={styles.label}>Nome</label>
-        <input
-          type="text"
-          id="nome_completo"
-          name="nome_completo"
-          value={form.nome_completo}
-          onChange={handleChange}
-          className={styles.input}
-        />
+          <div className={styles.field}>
+            <label htmlFor="nome_completo">Nome</label>
+            <input
+              type="text"
+              id="nome_completo"
+              name="nome_completo"
+              value={form.nome_completo}
+              onChange={handleChange}
+            />
+          </div>
 
-        <label htmlFor="telefone" className={styles.label}>Telefone</label>
-        <input
-          type="text"
-          id="telefone"
-          name="telefone"
-          value={form.telefone}
-          onChange={handleChange}
-          className={styles.input}
-          maxLength={15}
-        />
+          <div className={styles.field}>
+            <label htmlFor="telefone">Telefone</label>
+            <input
+              type="text"
+              id="telefone"
+              name="telefone"
+              value={form.telefone}
+              onChange={handleChange}
+              maxLength={15}
+            />
+          </div>
 
-        <label htmlFor="email" className={styles.label}>Email</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value={form.email}
-          onChange={handleChange}
-          className={styles.input}
-        />
+          <div className={styles.field}>
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={form.email}
+              onChange={handleChange}
+            />
+          </div>
+        </div>
 
         <button type="submit" className={styles.button}>
           {loading ? "Buscando..." : "Buscar"}
@@ -137,15 +145,24 @@ export function BuscaForm() {
       </form>
 
       {resultado && (
-        <div className={styles.card}>
-          <h3>Resultado:</h3>
-          <p><strong>Nome:</strong> {resultado.nome_completo}</p>
-          <p><strong>CPF:</strong> {resultado.cpf}</p>
-          <p><strong>Sexo:</strong> {resultado.sexo}</p>
-          <p><strong>Data Nascimento:</strong> {new Date(resultado.data_nascimento).toLocaleDateString()}</p>
-          <p><strong>Estado Civil:</strong> {resultado.estado_civil}</p>
-          <p><strong>Email:</strong> {resultado.email}</p>
-          <p><strong>Telefone:</strong> {resultado.telefone}</p>
+        <div className={styles.resultCard}>
+          <h3 className={styles.resultTitle}>Resultado:</h3>
+          <div className={styles.resultFields}>
+            {[
+              ["Nome", resultado.nome_completo],
+              ["CPF", resultado.cpf],
+              ["Sexo", resultado.sexo],
+              ["Data Nascimento", new Date(resultado.data_nascimento).toLocaleDateString()],
+              ["Estado Civil", resultado.estado_civil],
+              ["Email", resultado.email],
+              ["Telefone", resultado.telefone],
+            ].map(([label, value]) => (
+              <div key={label} className={styles.field}>
+                <label>{label}:</label>
+                <input type="text" value={value} readOnly />
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </div>
