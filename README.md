@@ -168,7 +168,12 @@ python3 db/SQL/CRUD/create.py
 
 ---
 
-## 9. Governança e Contribuições
+## 9. Habilitando o BE
+
+```bash
+/bank/BE go run . 
+```
+## 10. Governança e Contribuições
 
 Este projeto aceita contribuições seguindo boas práticas de versionamento e organização de código.
 

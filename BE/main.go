@@ -16,6 +16,8 @@ func main() {
 	r.Use(cors.New(cors.Config{
 		AllowOrigins: []string{
 			"http://localhost:5173", // Vite
+			"http://localhost:3000", // Next.js
+            "http://localhost:3001", // caso o dev server mude de porta
 		},
 		AllowMethods: []string{
 			"GET", "POST", "PUT", "DELETE", "OPTIONS",

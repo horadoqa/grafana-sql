@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+:root {
+  --background: #198754; /* verde */
+  --fontcolor: #ffffff;  /* branco */
+}
+
+body {
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--fontcolor); /* aplica a cor branca ao texto */
+}
+
+main {
+  color: var(--fontcolor);
+}
