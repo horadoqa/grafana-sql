@@ -102,7 +102,7 @@ func GetCandidatoByCPF(c *gin.Context) {
 	)
 	if err != nil {
 		if err == sql.ErrNoRows {
-			c.JSON(http.StatusNotFound, gin.H{"error": "candidato não encontrado"})
+			c.JSON(http.StatusNotFound, gin.H{"error": "Candidato não encontrado !!!"})
 			return
 		}
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
